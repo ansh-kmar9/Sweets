@@ -1,0 +1,91 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- CSS for button animation and message styling -->
+<style>
+  .animated-button {
+      animation: pulse 1s  ease-in;
+  }
+
+  @keyframes pulse {
+      0% {
+          transform: scale(1);
+      }
+
+      50% {
+          transform: scale(1.1);
+      }
+
+      100% {
+          transform: scale(1);
+      }
+  }
+
+  .thanks-message {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 28px;
+      padding: 20px 40px;
+      color: white;
+      background: linear-gradient(135deg, #FF8C00, #FF6347);
+      border-radius: 12px;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+  }
+
+  .thanks-message.show {
+      display: block;
+      opacity: 1;
+  }
+</style>
+<div class="container mt-5">
+    <h2 class="mb-4">Order Summary</h2>
+    <form id="orderForm" class="needs-validation" novalidate>
+        <!-- Name -->
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+            <div class="invalid-feedback">Please enter a name</div>
+        </div>
+        <!-- Mobile Number -->
+        <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" class="form-control" id="mobile" placeholder="Enter your mobile number" required>
+            <div class="invalid-feedback">Please enter Mobile Number</div>
+        </div>
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            <div class="invalid-feedback">Please enter email address</div>
+        </div>
+        <!-- Address -->
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+            <div class="invalid-feedback">Please give address</div>
+        </div>
+        <!-- Submit Button -->
+        <button type="button" id="placeOrderBtn" class="btn btn-primary mt-5">Place Order</button>
+    </form>
+    <!-- "Thanks for ordering" message -->
+    <div class="thanks-message" id="thanksMessage">Thanks for ordering!</div>
+</div>
+
+<!-- JavaScript to handle form submission and show animation -->
+<script>
+  document.getElementById('placeOrderBtn').addEventListener('click', function() {
+      // Add animation to the button
+      this.classList.add('animated-button');
+      // Show "thanks for ordering" message with fade-in effect
+      document.getElementById('thanksMessage').classList.add('show');
+      // Hide the message after a delay (5 seconds in this case)
+      setTimeout(function() {
+          document.getElementById('thanksMessage').classList.remove('show');
+      }, 50000);
+  });
+</script>
